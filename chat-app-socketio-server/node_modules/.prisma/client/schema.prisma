@@ -1,0 +1,25 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("PSQL_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model chatroom {
+  id           String   @id @default(uuid())
+  firstUserId  String
+  secondUserId String
+  roomId       String   @unique
+  createdOn    DateTime @default(now())
+}
+
+model chats {
+  id           String   @id @default(uuid())
+  message      String
+  createdOn    DateTime @default(now())
+  firstUserId  String
+  secondUserId String
+  chatRoomId   String
+}
